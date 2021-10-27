@@ -251,7 +251,7 @@
   function showCoverage(){
     let coverageTable = document.getElementById('coverageTable')
     coverageTable.innerHTML = ''
-    let ttl = 0
+    let ttl = [0,0,0,0,0,0,0,0]
     for(i=0;i<1000;i+=25){
       let tr = document.createElement('tr')
       for(j=0;j<25;j++){
@@ -270,14 +270,24 @@
         td.appendChild(document.createTextNode(`${n}[${w}]`))
         let c = (((16-(w*2))+(-2*Math.sign(w)))*16).toString(16)
         td.style.backgroundColor = `#${c}FF${c}`;
-        if(w>0) ttl++
+        ttl[w]++
         tr.appendChild(td)
       }
       coverageTable.appendChild(tr)
     }
     let coverage = document.getElementById('coverage')
-    let pct = ttl / 10
-    coverage.appendChild(document.createTextNode(`中獎率為${pct}%`))
+    let ttlsum = 0
+    for(i=7;i>0;i--){
+      ttlsum += ttl[i];
+      let pct = ttl[i] / 10
+      let pctt = ttlsum / 10
+      if(ttlsum>0){
+        coverage.appendChild(document.createTextNode(`中${i}張 [${pct}%] 累計共 [${pctt}%]`))
+        coverage.appendChild(document.createElement('br'))
+      }
+    }
+    let pct = ttl[0] / 10
+    coverage.appendChild(document.createTextNode(`什麼都沒中 [${pct}%]`))
   }
 
   function pad (str, max) {
