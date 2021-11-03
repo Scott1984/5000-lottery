@@ -294,12 +294,12 @@
       let pct = ttl[i] / 10
       let pctt = ttlsum / 10
       if(ttlsum>0){
-        coverage.appendChild(document.createTextNode(`中${i}張 [${pct}%] 累計共 [${pctt}%]`))
+        coverage.appendChild(document.createTextNode(`命中${i}次 [${pct}%] 累計共 [${pctt}%]`))
         coverage.appendChild(document.createElement('br'))
       }
     }
     let pct = ttl[0] / 10
-    coverage.appendChild(document.createTextNode(`什麼都沒中 [${pct}%]`))
+    coverage.appendChild(document.createTextNode(`完美迴避 [${pct}%]`))
   }
 
   function pad (str, max) {
